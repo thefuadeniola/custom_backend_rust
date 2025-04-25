@@ -1,0 +1,11 @@
+[package]
+name = "blog-server"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+axum = "*"
+tokio = {version="1.44", features=["macros", "full"]}
+tokio-macros = "2.3.0"
+serde = {version="*", features=["derive"]}
+sqlx = {version="*", features=["mysql", "runtime-tokio-native-tls"]}
