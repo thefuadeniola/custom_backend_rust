@@ -1,7 +1,9 @@
 use sqlx::MySqlPool;
+use std::env;
 
 pub async fn database_connection() -> Result<MySqlPool, sqlx::Error> {
-    MySqlPool::connect("mysql://actix_user:actixpass@db:3306/blog_server").await
+    let database = env::var("DATABASE_URL").expect("Failed to load connection string");
+    MySqlPool::connect(&database).await
 
 }
 
