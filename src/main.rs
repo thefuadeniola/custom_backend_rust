@@ -16,6 +16,7 @@ async fn main() {
 
     let db = database_connection().await.expect("Failed to connect to Database");
 
+
     let routes = Router::new()
                             .route("/", get(handle_home_request))
                             .route("/user/{id}/fetch", get(fetch_single_user))
