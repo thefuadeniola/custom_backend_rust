@@ -2,7 +2,7 @@ services:
   api:
     image: thefuadeniola/blog-server
     environment:
-      DATABASE_URL:  "mysql://actix_user:actixpass@db:3306/blog_server"
+      DATABASE_URL:  ${DATABASE_URL}
     build:
       context: .
       dockerfile: Dockerfile
@@ -16,7 +16,7 @@ services:
     environment:
       MYSQL_DATABASE: blog_server
       MYSQL_USER: actix_user
-      MYSQL_PASSWORD: actixpass
+      MYSQL_PASSWORD: ${DATABASE_PASSWORD}
       MYSQL_ROOT_PASSWORD: 123456
 
     ports:
