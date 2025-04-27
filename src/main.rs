@@ -12,25 +12,26 @@ mod blog;
 use blog::*;
 
 #[tokio::main]
-async fn main () {
-    let db = database_connection().await.expect("Failed to connect to database");
-    println!("Database connection established!");
+async fn main() {
+
+    let db = database_connection().await.expect("Failed to connect to Database");
 
     let routes = Router::new()
-                                .route("/", get(handle_home_request))
-                                .route("/user/{id}/fetch", get(fetch_single_user))
-                                .route("/user/create", post(create_new_user))
-                                .route("/blog/new", post(Blog::create_a_blog))
-                                .route("/blogs/all", get(Blog::fetch_all_blogs))
-                                .route("/blog/{id}", get(Blog::fetch_single_blog))
-                                .route("/blog/{id}/delete", delete(Blog::delete_a_blog))
-                                .with_state(db); 
+                            .route("/", get(handle_home_request))
+                            .route("/user/{id}/fetch", get(fetch_single_user))
+                            .route("/user/create", post(create_new_user))
+                            .route("/blog/new", post(Blog::create_a_blog))
+                            .route("/blogs/all", get(Blog::fetch_all_blogs))
+                            .route("/blog/{id}", get(Blog::fetch_single_blog))
+                            .route("/blog/{id}/delete", delete(Blog::delete_a_blog))
+                            .with_state(db); 
 
-    let listener = TcpListener::bind("127.0.0.1:8000").await.unwrap();
-    println!("Server running pn port 8000!");
+    let listener = TcpListener::bind("0.0.0.0:8000").await.unwrap();
 
-    axum::serve(listener, routes.into_make_service()).await.unwrap()
+    println!("Server running on localhost:8000");
 
+    axum::serve(listener, routes.into_make_service()).await.unwrap();    
+    
 }
 
 #[derive(Serialize)]
