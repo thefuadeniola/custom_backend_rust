@@ -11,3 +11,9 @@ tokio-macros = "2.3.0"
 serde = {version="*", features=["derive"]}
 sqlx = {version="*", features=["mysql", "runtime-tokio-native-tls"]}
 openssl = { version = "0.10.35", features = ["vendored"] }
+prkorm="*"
+bcrypt = "0.17.0"
+jsonwebtoken = "9.3.1"
+uuid = "1.16.0"
+chrono = "0.4.41"
+async-trait = "0.1.88"
