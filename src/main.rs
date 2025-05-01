@@ -19,15 +19,16 @@ async fn main() {
 
     let routes = Router::new()
                             .route("/", get(handle_home_request))
-                            .route("/user/{id}/fetch", get(api::fetch_single_user))
-                            .route("/user/create", post(api::create_new_user))
-                            .route("/users", get(api::get_users))
-                            .route("/user/login", post(api::login_user))
-                            .route("/user/delete/{id}", delete(api::delete_user_by_id))
-                            .route("/blog/new", post(Blog::create_a_blog))
-                            .route("/blogs/all", get(Blog::fetch_all_blogs))
-                            .route("/blog/{id}", get(Blog::fetch_single_blog))
-                            .route("/blog/{id}/delete", delete(Blog::delete_a_blog))
+                            .route("/user/{id}/fetch", get(fetch_single_user))
+                            .route("/user/create", post(create_new_user))
+                            .route("/users", get(get_users))
+                            .route("/user/login", post(login_user))
+                            .route("/user/delete/{id}", delete(delete_user_by_id))
+                            .route("/blog/new", post(create_a_blog))
+                            .route("/blogs/all", get(fetch_all_blogs))
+                            .route("/blog/{id}", get(fetch_single_blog))
+                            .route("/user/{id}/blogs", get(get_all_blogs_by_user_id))
+                            .route("/blog/{id}/delete", delete(delete_a_blog))
                             .with_state(db); 
 
     let listener = TcpListener::bind("0.0.0.0:8000").await.unwrap();
